@@ -9,7 +9,7 @@ class Oystercard
   end
 
   def top_up(amount)
-    fail "Balance cannot exceed #{BALANCE_LIMIT}" if @balance + amount > BALANCE_LIMIT
+    fail "Balance cannot exceed #{BALANCE_LIMIT}" if exceeded_balance?(amount)
     
     @balance += amount
   end
@@ -17,7 +17,7 @@ class Oystercard
   def touch_in(station)
 
     fail "Already touched in" if in_journey?
-    fail "Insufficient funds" if @balance < MINIMUM_AMOUNT
+    fail "Insufficient funds" if insufficient_funds?
 
     @entry_station = station
   end
@@ -38,5 +38,13 @@ class Oystercard
 
   def deduct(amount)
     @balance -= amount
+  end
+
+  def insufficient_funds? 
+    @balance < MINIMUM_AMOUNT
+  end
+
+  def exceeded_balance?(amount)
+    @balance + amount > BALANCE_LIMIT
   end
 end
