@@ -6,11 +6,11 @@ class Oystercard
   MINIMUM_AMOUNT = 1
   def initialize(balance = 0)
     @balance = balance
-    @in_journey = false
   end
 
   def top_up(amount)
     fail "Balance cannot exceed #{BALANCE_LIMIT}" if @balance + amount > BALANCE_LIMIT
+    
     @balance += amount
   end
 
@@ -39,6 +39,4 @@ class Oystercard
   def deduct(amount)
     @balance -= amount
   end
-
-
 end
