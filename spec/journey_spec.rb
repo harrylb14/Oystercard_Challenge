@@ -42,4 +42,6 @@ describe Journey do
       expect(subject.fare).to eq Oystercard::MINIMUM_AMOUNT
     end
   end
+
+  
 end

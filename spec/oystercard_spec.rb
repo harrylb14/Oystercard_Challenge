@@ -46,6 +46,17 @@ describe Oystercard do
       subject.touch_in(entry_station)
       expect(subject.current_journey.entry_station).to eq(entry_station)
     end
+
+    it 'deducts penalty fare if card is not touched out' do 
+      top_up
+      subject.touch_in(entry_station)
+      expect { subject.touch_in(entry_station) }.to change{ subject.balance }.by(-Journey::PENALTY_FARE)
+    end
+
+    it 'does not deduct penalty fare if chard is touched out' do
+      top_up
+      expect { subject.touch_in(entry_station) }.not_to change{ subject.balance }
+    end
   end
 
   describe '#touch_out' do
