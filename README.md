@@ -9,7 +9,7 @@ Oystercard Challenge
    - Doubles 
    - Class Extraction
 
-- The challeenge was based on the following user stories 
+- The challenge was based on the following user stories.
 
 ## Weekly challenge user stories
 
@@ -63,6 +63,8 @@ I need a penalty charge deducted if I fail to touch in or out
 In order to be charged the correct amount
 As a customer
 I need to have the correct fare calculated
+
+```
 
 ## Approach 
 - The challenge was broken down into the following sequence:
