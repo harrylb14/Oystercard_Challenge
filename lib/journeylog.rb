@@ -11,7 +11,7 @@ class JourneyLog
   end
 
   def finish(exit_station)
-    current_journey.exit_station = exit_station
+    this_journey.exit_station = exit_station
     @journeys << current_journey
     @current_journey = nil
   end

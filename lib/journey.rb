@@ -17,7 +17,13 @@ class Journey
   end
 
   def fare
-    @entry_station == nil || @exit_station == nil ? PENALTY_FARE : Oystercard::MINIMUM_AMOUNT
+    @entry_station == nil || @exit_station == nil ? PENALTY_FARE : price
+  end
+
+  private 
+  
+  def price
+    Oystercard::MINIMUM_AMOUNT + (@exit_station.zone - @entry_station.zone).abs
   end
  
 end

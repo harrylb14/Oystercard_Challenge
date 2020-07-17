@@ -2,8 +2,8 @@ require 'oystercard'
 
 describe Oystercard do
 
-  let(:entry_station) { double :station }
-  let(:exit_station) { double :station }
+  let(:entry_station) { double :station, zone: 1 }
+  let(:exit_station) { double :station, zone: 1 }
   let(:journey) { {entry_station: entry_station, exit_station: exit_station} }
   let(:top_up) { subject.top_up(Oystercard::MINIMUM_AMOUNT) }
   let(:touch_in) { subject.touch_in(entry_station) }
@@ -11,17 +11,6 @@ describe Oystercard do
 
   it 'Adds balance of zero to a new card' do
     expect(subject.balance).to eq(0)
-  end
-
-  it 'has an empty list of journeys by default' do
-    expect(subject.journeys).to be_empty
-  end
-
-  it 'stores a journey' do
-    top_up
-    touch_in
-    touch_out
-    expect(subject.journeys).to include journey
   end
 
   describe '#top_up(amount)' do
@@ -40,13 +29,7 @@ describe Oystercard do
     it 'throws an error if balance is less than minimum amount' do
       expect { touch_in }.to raise_error 'Insufficient funds'
     end
-    
-    it 'creates a new journey with entry station' do
-      top_up
-      subject.touch_in(entry_station)
-      expect(subject.current_journey.entry_station).to eq(entry_station)
-    end
-
+  
     it 'deducts penalty fare if card is not touched out' do 
       top_up
       subject.touch_in(entry_station)
