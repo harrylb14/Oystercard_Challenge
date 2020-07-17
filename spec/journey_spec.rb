@@ -18,16 +18,6 @@ describe Journey do
     end
   end
 
-  describe '#complete?' do 
-    it 'returns false if there is no exit station' do
-      expect(subject).not_to be_complete
-    end
-    it 'returns true if there is an exit station' do
-      subject.finish(final_station)
-      expect(subject).to be_complete
-    end
-  end
-
   describe '#fare' do
     it 'returns the penalty fare if there is an exit station but no entry station provided' do
       journey = Journey.new

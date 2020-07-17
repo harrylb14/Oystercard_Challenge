@@ -12,12 +12,8 @@ class Journey
     self
   end
 
-  def complete?
-    !!@exit_station 
-  end
-
   def fare
-    @entry_station == nil || @exit_station == nil ? PENALTY_FARE : price
+    complete? ? price : PENALTY_FARE
   end
 
   private 
@@ -25,5 +21,8 @@ class Journey
   def price
     Oystercard::MINIMUM_AMOUNT + (@exit_station.zone - @entry_station.zone).abs
   end
- 
-end
+
+  def complete?
+    !!@exit_station && !!@entry_station
+  end
+ end
